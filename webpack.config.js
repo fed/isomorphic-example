@@ -1,16 +1,12 @@
-if (process.env.NODE_ENV === 'development') {
-  var loaders = ['react-hot','babel'];
-} else {
-  var loaders = ['babel'];
-}
+var loaders = ['babel'];
 
 module.exports = {
   devtool: 'eval',
   entry: './app-client.js',
   output: {
-    path: __dirname + '/public/dist',
-    filename: 'bundle.js',
-    publicPath: '/dist/'
+    path: 'dist/',
+    publicPath: 'dist/',
+    filename: 'bundle.js'
   },
   module: {
     loaders: [{
@@ -21,6 +17,10 @@ module.exports = {
   },
   devServer: {
     inline: true,
-    port: 6789
+    port: 6789,
+    historyApiFallback: true
   },
+  stats: {
+    colors: true
+  }
 };

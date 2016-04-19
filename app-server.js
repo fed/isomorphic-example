@@ -4,13 +4,13 @@ import ReactDOMServer from 'react-dom/server';
 import express from 'express';
 import hogan from 'hogan-express';
 
-import routes from './routes';
+import routes from './src/routes';
 
 const app = express();
 
 app.engine('html', hogan);
-app.set('views', __dirname + '/views');
-app.use('/', express.static(__dirname + '/public/'));
+app.set('views', __dirname + '/dist');
+app.use('/', express.static(__dirname + '/dist/'));
 app.set('port', process.env.PORT || 4567);
 
 app.get('*', (req, res) => {
@@ -18,6 +18,9 @@ app.get('*', (req, res) => {
     const reactMarkup = ReactDOMServer.renderToStaticMarkup(<RoutingContext {...renderProps} />);
 
     res.locals.reactMarkup = reactMarkup;
+    res.locals.site = {
+      title: 'Isomorphic JavaScript Example'
+    };
 
     if (error) {
       res.status(500).send(error.message)

@@ -1,17 +1,16 @@
-// app-client.js
 import React from 'react';
 import {render} from 'react-dom';
 import {Router} from 'react-router';
 import createBrowserHistory from 'history/lib/createBrowserHistory';
 
-import routes from './routes';
+import routes from './src/routes';
 
+const mountpoint = document.getElementById('app');
 const history = createBrowserHistory();
-const Routes = (
+const router = (
   <Router history={history}>
     {routes}
   </Router>
 );
 
-const app = document.getElementById('app');
-render(Routes, app);
+render(router, mountpoint);
